@@ -1,4 +1,19 @@
+The code is to search "sydney,nsw" in flickr and save the image title, id, url into the database
 
-requirements:
-1. PHP 5.3 +
-2. 
+It's been developed on
+MySQL 5.5 x64
+PHP 5.3.8
+Phlickr 0.2.7
+
+php curl is required for the application
+
+Note:
+Please setup the database in application/config/application.ini and create tables in sql/20120314_init.sql
+
+LIMIT:
+No paginating introduced
+There is still a PHP Notice from the library Phlickr
+
+Bug:
+1. cache still have problem. 
+2. proxy setting for curl

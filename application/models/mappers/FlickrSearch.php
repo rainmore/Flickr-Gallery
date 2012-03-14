@@ -99,12 +99,12 @@ class Model_Mapper_FlickrSearch {
     
     public function getSearchCache() {
         $tmp = array();
-        $search = 'sydney,nsw';
-        $page = 1;
-        $perPage = 10;
+        $search = $this->getSearchForm()->getSearch();
+        $page = $this->getSearchForm()->getPage();
+        $perPage = $this->getSearchForm()->getPerPage();
         $cacheTable = $this->getTableCache();
         $db = $cacheTable->getAdapter();
-        $where = $db->quoteInto('search_time > ' . (time() + 500) . ' AND search_term = ?', $search);
+        $where = $db->quoteInto('search_time + ' . $this->getFlickrConfig()->cache->time . ' > ' . time() . ' AND search_term = ?', $search);
 
         $cacheRow = $cacheTable->fetchRow($where, 'id DESC');
         
@@ -131,9 +131,9 @@ class Model_Mapper_FlickrSearch {
     }
     
     public function doSearch() {
-        $search = 'sydney,nsw';
-        $page = 1;
-        $perPage = 10;
+        $search = $this->getSearchForm()->getSearch();
+        $page = $this->getSearchForm()->getPage();
+        $perPage = $this->getSearchForm()->getPerPage();
         $tmp = array();
         
         $request = $this->getPhlickr()->createRequest(
